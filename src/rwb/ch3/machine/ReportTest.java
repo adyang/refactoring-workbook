@@ -5,13 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
 public class ReportTest {
 	@Test
 	public void testReport() throws IOException {
-		ArrayList<Machine> line = new ArrayList<Machine>();
+		List<Machine> line = new ArrayList<>();
 		line.add(new Machine("mixer", "left"));
 
 		Machine extruder = new Machine("extruder", "center");
@@ -27,7 +28,7 @@ public class ReportTest {
 		robot.pick();
 
 		StringWriter out = new StringWriter();
-		Report.report(out, line, robot);
+		new Report(out).report(line, robot);
 
 		String expected = "FACTORY REPORT\n" + "Machine mixer\nMachine extruder\n" + "Machine oven bin=chips\n\n"
 				+ "Robot location=extruder bin=paste\n" + "========\n";
